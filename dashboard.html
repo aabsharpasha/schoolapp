@@ -1,0 +1,70 @@
+<!doctype html>
+<html ng-app = "myApp">
+<head>
+<meta charset="utf-8">
+<title>Admin</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+<script src="assets/js/library.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script src="assets/js/custom.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="assets/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/global.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+
+
+</head>
+
+<body>
+    
+<!-- wrapper starts Here -->
+<div id="wrapper"> 
+  <!-- Header starts Here -->
+  <header id="header">
+    <div class="main">
+      <h2> School Application </h2>
+      <a href="/logout.php"> Logout </a> 
+     </div>
+  </header>
+  <!-- Header ends Here --> 
+  <!-- content starts Here -->
+  <div class="main">
+    <div class="content"> 
+      
+      <!-- sidebar starts Here -->
+      <div class="sidebar">
+        <ul class="clearfix" ng-controller="TabController">
+          <li><a ng-class="{active: isSet(1) ? 'active' : ''}" ng-click="setTab(1)" ng-href="/dashboard.html#/"> Create User </a></li>
+          <li><a ng-class="{active: isSet(2) ? 'active' : ''}" ng-click="setTab(2)" ng-href="#add_assignment"> Upload Contents for class </a></li>
+          <li><a href="#/add_news" ng-class="{active: isSet(3) ? 'active' : '' }" ng-click="setTab(3)"> Upload Contents for All </a></li>
+        </ul>
+      </div>
+      <!-- sidebar ends Here --> 
+      <div  style="height:100%;width:100%" ng-view></div>
+    </div>
+  </div>
+  <!-- content ends Here -->   
+</div>
+<!-- wrapper ends Here -->
+<!-- footer starts Here -->
+<footer id="footer">
+  <div class="main">
+    <p>Copyright &copy; 2015-16. <a href="SchoolApplication.com">SchoolApplication.com</a> - All Rights Reserve</p>
+  </div>
+</footer>
+
+<script src="assets/js/angular.js"></script>
+<script src="assets/js/angular-route.min.js"></script>
+<script src="assets/js/ui-bootstrap-tpls-0.11.0.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/controller.js"></script>
+<script src="assets/js/services.js"></script>
+
+<script src="ckeditor/ckeditor.js"></script>
+<!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+<![endif]-->
+</body>
+</html>

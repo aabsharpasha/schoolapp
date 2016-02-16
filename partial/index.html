@@ -1,0 +1,18 @@
+<div class="login-container">
+    
+    <div class="login-form-wrap" ng-controller="LoginController">    
+        <h1> School Application</h1>
+        
+        <div class="login-form" >
+           
+            <div style="height:25;color:green;font-size:15px;margin:20px;" ng-show="msg">{{msg}}</div>
+            <form ng-submit="authLogin()">
+                <input type="text" placeholder="Username" ng-model="username" required />
+                <input type="password" placeholder="Password" ng-model = "password" required />
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    </div>
+    <div style="clear:both;"></div>
+</div>
+<div style="clear:both;">&nbsp;</div>

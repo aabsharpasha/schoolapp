@@ -1,0 +1,231 @@
+/*
+
+ ::Table Of Content
+
+
+
+ 1.) Default Style
+
+ 2.) Global Typography
+
+ 3.) Header section
+
+ 4.) Footer section
+
+ -------------------------------------*/
+
+
+
+/*
+
+ 1.) Default Style
+
+ -------------------------------------*/
+
+
+
+/* Headings */
+
+h1, h2, h3, h4, h5, h6 {
+	clear: both;
+	font-weight: normal;
+}
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+/*
+
+ 3.) Global Typography
+
+ -------------------------------------*/
+
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 400;
+	font-size: 62.5%;
+	line-height: 1;
+	color: #293134;
+} 
+#Wrapper, #header, #content, #footer {
+	width: 100%;
+}
+.main {
+	width: 100%;
+	margin: 0 auto;
+	max-width: 1100px;
+}
+h1 {
+	font-size: 3.6em;
+	line-height: 1;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+}
+h2 {
+	font-size: 2.7em;
+	line-height: 1;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+h3 {
+	font-size: 2em;
+	line-height: 1;
+	font-weight: 700;
+	text-transform:uppercase;
+	margin-bottom:20px;
+} 
+h4 {
+	font-size: 18px;
+	line-height: 20px;
+}
+p {
+	font-size: 16px;
+	line-height: 29px;
+}
+a {
+	font-size: 17px;
+	line-height: 25px;
+	color: #fff;
+	text-decoration: none;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+	-ms-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+}
+a:hover {
+	color: #efefef;
+}
+input, textarea {
+	display: block;
+	font-size: 14px;
+}
+input[type="submit"] {
+	-webkit-appearance: none;
+	-webkit-border: none;
+	text-align: center;
+	cursor: pointer;
+	background: #55df2a;
+	max-width: 181px;
+	width: 100%;
+	height: 46px;
+	font-weight: 700;
+	font-size: 2em;
+	color: #fff;
+	margin: 40px auto 0;
+	border: 0;
+	border-radius: 3px;
+	text-transform: uppercase;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+	-ms-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+}
+input[type="submit"]:hover {
+	background: #5ed439;
+}
+input[type="text"], input[type="password"], input[type="email"] {
+	max-width: 385px;
+	width: 100%;
+	font-weight: 300;
+	font-size: 1.8em;
+	color: #888888;
+	background: #ededed;
+	padding: 5px;
+	border: 1px solid #cfcfcf;
+	margin-bottom: 17px;
+	border-radius: 3px;
+	height: 48px;
+	line-height: 48px;
+}
+input[type="text"]:focus, input[type="password"]:focus {
+	-webkit-box-shadow: 0 0 2px 2px #ededed;
+	box-shadow: 0 0 2px 2px #ededed;
+}
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: " ";
+	clear: both;
+	height: 0;
+}
+.clearfix {
+	display: inline-block;
+}
+/* start commented backslash hack \*/
+
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+/*
+
+ 4.) Header section
+
+ -------------------------------------*/
+
+#header {
+	height: 80px;
+	text-align: right;
+	background: -moz-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* ff3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(13,163,210,1)), color-stop(100%, rgba(14,164,210,1))); /* safari4+,chrome */
+	background: -webkit-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* safari5.1+,chrome10+ */
+	background: -o-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* opera 11.10+ */
+	background: -ms-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* ie10+ */
+	background: linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* w3c */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea4d2', endColorstr='#0da3d2', GradientType=1 ); /* ie6-9 */
+}
+#header a {
+	line-height: 80px;
+}
+#header h2 {
+	background: #1d95c2 none repeat scroll 0 0;
+	float: left;
+	height: 80px;
+	line-height: 80px;
+	max-width: 308px;
+	text-align: center;
+	width: 100%;
+}
+/*
+
+ 5.)Footer section
+
+ -------------------------------------*/
+
+#footer {
+	background: #c8c8c8;
+	height: 45px;
+	text-align: right;
+}
+#footer p {
+	color: #787878;
+	font-size: 12px;
+	line-height: 45px;
+}
+#footer p a {
+	color: #383838;
+	font-size: 12px;
+}
+/** Sticky Footer **/
+
+#wrapper:after {
+	content: "";
+	display: block;
+}
+#wrapper:after {
+	height: 45px;
+}
+html, body {
+	height: 100%;
+}
+#wrapper {
+	margin-bottom: -45px;
+	min-height: 100%;
+}

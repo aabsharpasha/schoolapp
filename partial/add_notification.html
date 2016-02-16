@@ -1,0 +1,32 @@
+<div class="registration-form-wrapper upload-content-wrapper">
+        <ul class="clearfix tabbing-list upload-tabbing">
+          <li><a ng-href="#add_news" > News </a></li>
+          <li><a ng-href="#add_information"> Information </a></li>
+          <li><a ng-href="#add_notification" class="active">Notification </a></li>
+        </ul>
+        <!--news registration-form starts Here -->
+        <div class="registration-form clearfix tabbing active-content" id="tab1" ng-init="loader_hide=1">
+          <h3> Add Notification... </h3>
+          <form ng-submit="save_data('5')" ng-init="loader_hide=1">
+          <div class="create-assignment">
+             <input type="text" placeholder="Enter Title" ng-model="content_title" required>
+         <textarea required name="editor2" id="editor2" rows="10" cols="80" ck-editor ng-model="value">
+                
+            </textarea>
+            
+          </div>
+         
+        
+         
+<!--          <input type="submit" value="Upload Video">-->
+         <input type="hidden" ng-model="content_id" value="" />
+           <input type="submit" value="SUBMIT" >
+           <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
+           <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg}}</div>
+          </form>
+          </div>
+        <!-- news registration-form ends Here --> 
+       <a ng-href="#/list_notification" class="view-list">View Notification</a> 
+ </div>
+      <!-- registration-form-wrapper ends Here --> 
+    

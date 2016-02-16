@@ -1,0 +1,219 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Student</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+<script src="assets/js/library.js"></script>
+<script src="assets/js/jquery-ui.js"></script>
+<script src="assets/js/custom.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/global.css" />
+<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+<!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+<![endif]-->
+</head>
+<body>
+<!-- wrapper starts Here -->
+<div id="wrapper"> 
+  <!-- Header starts Here -->
+  <header id="header">
+    <div class="main">
+      <h2> School Application </h2>
+      <a href="#"> Logout </a> 
+     </div>
+  </header>
+  <!-- Header ends Here --> 
+  <!-- content starts Here -->
+  <div class="main">
+    <div class="content"> 
+      
+      <!-- sidebar starts Here -->
+      <div class="sidebar">
+        <ul class="clearfix">
+          <li><a href="student.html" class="active"> Create User </a></li>
+          <li><a href="assignment.html"> Upload Contents for class </a></li>
+          <li><a href="all_news.html"> Upload Contents for All </a></li>
+        </ul>
+      </div>
+      <!-- sidebar ends Here --> 
+      
+      <!-- registration-form-wrapper starts Here -->
+      <div class="registration-form-wrapper clearfix">
+        <ul class="clearfix tabbing-list">
+          <li><a href="#tab1" class="active">Student</a></li>
+          <li><a href="#tab2">Teacher</a></li>
+        </ul>
+        <!-- student registration-form starts Here -->
+        <div class="registration-form clearfix tabbing active-content" id="tab1">
+          <div class="select-class">
+            <div class="clearfix select-class-data"> Select Class <i></i> </div>
+            <div class="select-dropdown">
+         	 <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-one" name="student" value="class-one">
+                  <label for="class-one"> Class 1 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-six" name="student" value="class-six">
+                  <label for="class-six"> Class 6 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-two" name="student" value="class-two">
+                  <label for="class-two"> Class 2 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-seven" name="student" value="class-seven">
+                  <label for="class-seven"> Class 7 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-three" name="student" value="class-three">
+                  <label for="class-three"> Class 3 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-eight" name="student" value="class-eight">
+                  <label for="class-eight"> Class 8 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-four" name="student" value="class-four">
+                  <label for="class-four"> Class 4 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-nine" name="student" value="class-nine">
+                  <label for="class-nine"> Class 9 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-five" name="student" value="class-five">
+                  <label for="class-five"> Class 5 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="radio" id="class-ten" name="student" value="class-ten">
+                  <label for="class-ten"> Class 10 </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3> Student Username &amp; Password</h3>
+          <div class="clearfix">
+            <form name="" action="" method="get">
+              <div class="wrapper-field clearfix">
+                <label class="label"> Name </label>
+                <input type="text">
+              </div>
+              <div class="wrapper-field clearfix">
+                <label class="label"> Email Id </label>
+                <input type="text">
+              </div>
+              <input type="submit" value="SUBMIT" >
+            </form>
+          </div>
+          <a href="#" class="view-list">View Students List</a> 
+        </div>
+        <!-- student registration-form ends Here --> 
+         <!-- teacher registration-form starts Here -->
+        <div class="registration-form clearfix tabbing" id="tab2">
+          <div class="select-class">
+            <div class="clearfix select-class-data"> Select Class <i></i> </div>
+            <div class="select-dropdown">
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="select-alla" >
+                  <label for="select-alla"> Select All </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-onea" >
+                  <label for="class-onea"> Class 1 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-sixa" >
+                  <label for="class-sixa"> Class 6 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-twoa" >
+                  <label for="class-twoa"> Class 2 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-sevena" >
+                  <label for="class-sevena"> Class 7 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-three" >
+                  <label for="class-three"> Class 3 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-eight" >
+                  <label for="class-eight"> Class 8 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-four" >
+                  <label for="class-four"> Class 4 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-nine" >
+                  <label for="class-nine"> Class 9 </label>
+                </div>
+              </div>
+              <div class="clearfix select-dropdown-listing">
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-five" >
+                  <label for="class-five"> Class 5 </label>
+                </div>
+                <div class="select-dropdown-listing-left">
+                  <input type="checkbox" id="class-ten" >
+                  <label for="class-ten"> Class 10 </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3> Teacher Username &amp; Password</h3>
+          <div class="clearfix">
+            <form name="" action="" method="get">
+              <div class="wrapper-field clearfix">
+                <label class="label"> Name </label>
+                <input type="text">
+              </div>
+              <div class="wrapper-field clearfix">
+                <label class="label"> Email Id </label>
+                <input type="text">
+              </div>
+              <input type="submit" value="SUBMIT" >
+            </form>
+          </div>
+          <a href="#" class="view-list">View Teachers List</a> 
+        </div>
+        
+        <!--teacher registration-form ends Here --> 
+        </div>
+      <!-- registration-form-wrapper ends Here --> 
+    </div>
+  </div>
+  <!-- content ends Here -->   
+</div>
+<!-- wrapper ends Here -->
+<!-- footer starts Here -->
+<footer id="footer">
+  <div class="main">
+    <p>Copyright &copy; 2015-16. <a href="SchoolApplication.com">SchoolApplication.com</a> - All Rights Reserve</p>
+  </div>
+</footer>
+<!-- footer ends Here -->
+</body>
+</html>

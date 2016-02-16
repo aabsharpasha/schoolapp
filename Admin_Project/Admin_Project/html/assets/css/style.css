@@ -1,0 +1,356 @@
+/**** Login page starts here **/
+.login-container {
+	background: -moz-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* ff3.6+ */
+	background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(13,163,210,1)), color-stop(100%, rgba(14,164,210,1))); /* safari4+,chrome */
+	background: -webkit-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* safari5.1+,chrome10+ */
+	background: -o-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* opera 11.10+ */
+	background: -ms-linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* ie10+ */
+	background: linear-gradient(45deg, rgba(13,163,210,1) 0%, rgba(14,164,210,1) 100%); /* w3c */
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea4d2', endColorstr='#0da3d2', GradientType=1 ); /* ie6-9 */
+	min-height: 100%;
+}
+.login-form-wrap {
+	max-width: 490px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 2;
+}
+.login-form {
+	background: #fff;
+	border-radius: 12px;
+	border: 6px solid #379dbd;
+	padding: 55px 45px 40px;
+}
+.login-form input[type="text"] {
+	background: url(../images/sprite-image.png) 21px 12px no-repeat #ededed;
+	padding-left: 50px;
+}
+.login-form input[type="password"] {
+	background: url(../images/sprite-image.png) 21px -30px no-repeat #ededed;
+	padding-left: 50px;
+}
+/**** Student page starts here **/
+.content {
+	background: #fff;
+	position: relative;
+	padding-bottom: 80px;
+}
+.sidebar {
+	left: 0;
+	top: 0px;
+	width: 308px;
+	height: 100%;
+	z-index: 2;
+	position: absolute;
+	background: #eeeeee;
+}
+.sidebar ul a {
+	display: block;
+	height: 62px;
+	color: #5c5c5c;
+	font-size: 1.9em;
+	line-height: 62px;
+	padding-left: 23px;
+	width: 100%;
+	border-bottom: 1px solid #d8d8d8;
+	position: relative;
+}
+.sidebar ul a.active {
+	color: #fff;
+	border-left: 5px solid #55df2a;
+	background: #404040;
+}
+.sidebar ul a.active:after {
+	border-left: 10px solid rgba(0, 0, 0, 0);
+	border-right: 10px solid #fff;
+	border-top: 10px solid rgba(0, 0, 0, 0);
+	border-bottom: 10px solid rgba(0, 0, 0, 0);
+	right: 0px;
+	height: 0;
+	margin-top: -10px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+	z-index: 999;
+	content: "";
+}
+.sidebar ul a:hover {
+	color: #fff;
+	border-left: 5px solid #55df2a;
+	background: #404040;
+}
+.sidebar ul a:hover:after {
+	border-left: 10px solid rgba(0, 0, 0, 0);
+	border-right: 10px solid #fff;
+	border-top: 10px solid rgba(0, 0, 0, 0);
+	border-bottom: 10px solid rgba(0, 0, 0, 0);
+	right: 0px;
+	height: 0;
+	margin-top: -10px;
+	top: 50%;
+	position: absolute;
+	width: 0;
+	z-index: 999;
+	content: "";
+}
+.registration-form-wrapper {
+	padding-top: 45px;
+	padding-left: 90px;
+	margin-left: 308px;
+	max-width: 717px;
+}
+.tabbing-list {
+	padding-left: 15px;
+}
+.tabbing-list li {
+	float: left;
+	margin-left: 10px;
+}
+.tabbing-list li a {
+	display: block;
+	font-size: 19px;
+	background: #b5b5b5;
+	width: 171px;
+	height: 49px;
+	text-align: center;
+	line-height: 49px;
+	border-radius: 3px 3px 0 0;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+	-ms-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+}
+.tabbing-list li a.active, .tabbing-list li a:hover {
+	background: #404040;
+}
+.registration-form h3 {
+	margin-bottom: 40px;
+	color: #404040;
+}
+.registration-form {
+	width: 620px;
+	border: 1px solid #b5b5b5;
+	padding: 24px 20px 45px 24px;
+	position: relative;
+}
+.registration-form .label {
+	max-width: 130px;
+	width: 100%;
+	float: left;
+	font-size: 18px;
+	color: #404040;
+	padding-left: 35px;
+	line-height: 48px;
+	font-weight: 600;
+}
+.registration-form input[type="submit"] {
+	float: right;
+	margin-right: 49px;
+	margin-top: 18px;
+}
+.view-list {
+	border-bottom: 1px solid #349dbe;
+	color: #349dbe;
+	display: inline-block;
+	position: absolute;
+	right: 0px;
+	bottom: -30px;
+	z-index: 2;
+	font-size: 16px;
+	line-height: 20px;
+}
+.view-list:hover {
+	color: #4eabc8;
+}
+/**** Assignment page starts here **/
+.tabbing-list.upload-tabbing li {
+	margin-left: 7px;
+}
+.tabbing-list.upload-tabbing li a {
+	width: 135px;
+	height: 38px;
+	line-height: 38px;
+}
+.select-class {
+	font-size: 17px;
+	color: #888888;
+	font-weight: 300;
+	background: #eeeeee;
+	height: 42px;
+	line-height: 40px;
+	margin-bottom: 40px;
+	position: relative;
+	border: 1px solid #d7d7d7;
+}
+.select-class-data {
+	padding-left: 30px;
+}
+.select-class:before {
+	left: 0px;
+	height: 36px;
+	top: 0;
+	position: absolute;
+	width: 659px;
+	z-index: 1;
+	content: "";
+	background: url(../images/select-class-shadow.png) left top no-repeat;
+}
+.select-class i {
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 40px;
+	width: 40px;
+	cursor: pointer;
+	z-index: 4;
+	background: url(../images/sprite-image.png) 15px -77px no-repeat #404040;
+}
+/** Custom Checkbox styling **/
+.c-form label {
+	display: inline-block;
+	cursor: pointer;
+	position: relative;
+	padding-left: 10px;
+	margin-right: 15px;
+	font-size: 13px;
+}
+.c-form input[type=checkbox], .c-form input[type=radio] {
+	display: none;
+}
+.c-form label:before {
+	content: "";
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+	position: absolute;
+	left: 0;
+	bottom: 1px;
+	background-color: #fff;
+	border: 1px solid #b3b3b3;
+}
+.radio-form.c-form label:before {
+	content: "";
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	margin-right: 10px;
+	position: absolute;
+	left: 0;
+	bottom: 1px;
+	background-color: #fff;
+	border: 1px solid #b3b3b3;
+	border-radius: 6px;
+}
+.c-form input[type=checkbox]:checked + label:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	line-height: 15px;
+}
+.c-form input[type=radio]:checked + label:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 15px;
+	color: #000;
+	text-align: center;
+	line-height: 15px;
+}
+.select-dropdown {
+	display: none;
+	left: 0;
+	top: 40px;
+	width: 100%;
+	z-index: 4;
+	background: #f6f6f6;
+	position: absolute;
+	border: 1px solid #ccc;
+	-webkit-box-shadow: 2px 2px 2px 2px #b3b3b3;
+	box-shadow: 2px 2px 2px 2px #b3b3b3;
+}
+.select-dropdown label {
+	color: #5b5b5b;
+	display: inline;
+	font-size: 16px;
+}
+.select-dropdown .select-dropdown-listing + .select-dropdown-listing {
+	border-top: 1px solid #cccccc;
+}
+.select-dropdown-listing-left {
+	float: left;
+	padding-left: 14px;
+	width: 50%;
+}
+/***Assestment Page starts here **/
+.upload-video input[type="text"] {
+	height: 40px;
+	max-width: 400px;
+	line-height: 40px;
+	font-size: 1.7em;
+	border-radius: 0;
+	float: left;
+}
+.upload-video input[type="submit"] {
+	font-size: 1.6em;
+	font-weight: 700;
+	line-height: 40px;
+	height: 40px;
+	text-transform: capitalize;
+	margin: 0;
+	float: right;
+	max-width: 167px;
+	background: #404040;
+	color: #fff;
+	border-radius: 0;
+}
+.create-assignment {
+	margin-bottom: 10px;
+}
+.upload-content-wrapper input[type="submit"] {
+	margin-right: 0;
+}
+.upload-content-wrapper .registration-form {
+	padding-bottom: 30px;
+}
+.upload-content-wrapper h3 {
+	margin-bottom: 15px;
+}
+/*** Time Table Page starts here **/
+.timetable-wrapper .select-date {
+	float: left;
+	max-width: 231px;
+	width: 100%;
+}
+.select-date input[type="text"] {
+	border-radius: 0;
+	max-width: 200px;
+	height: 40px;
+	line-height: 40px;
+}
+.timetable-wrapper .create-assignment {
+	float: left;
+	max-width: 400px;
+	width: 100%;
+	margin-left: 10px;
+}
+.registration-form.timetable-wrapper-page {
+	padding: 15px 10px 40px 15px;
+	width: 679px;
+}
+.create-assignment img {
+	max-width: 100%;
+}
+.tabbing {
+	display: none;
+}
+.active-content {
+	display: block;
+}
