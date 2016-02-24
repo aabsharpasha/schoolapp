@@ -19,21 +19,6 @@ Class SchoolAppClass {
     function __construct($request = null) {
         $obj_dbh = new database();
         $this->dbh = $obj_dbh->dbh;
-        // if($_POST['token'] != $this->api_token) {
-        //   $app = \Slim\Slim::getInstance();
-        //   $app->halt(401);
-       
-        // }
-//        if($request['source']) {
-//            if(!isset($_SESSION['USER'])) {
-//               $res_arr['status'] = 'Ok';
-//               $res_arr['data'] = array();
-//               $res_arr['msg'] = 'Invalid Session';
-//               $res_arr['is_success'] = TRUE;
-//               
-//               return $res_arr;
-//            }
-//        }
     }
 
     function get_all_users() {
@@ -118,7 +103,7 @@ Class SchoolAppClass {
     }
 
     function create_user($attribute_arr = array()) {
-         if(!isset($attribute_arr['user_id'])) {
+         if(!isset($attribute_arr['user_id']) && !isset($attribute_arr['password'])) {
             $attribute_arr['password'] = $this->randomPassword();
          }
         $attributes_str_insert = $this->prepare_attributes($attribute_arr);
@@ -136,7 +121,6 @@ Class SchoolAppClass {
         }
         else {
                 $exist = $this->get_data_by_table($tbl_name, $condition);
-                
                 if (!$exist) {
                     $res = $this->insert_data($attributes_str_insert, $tbl_name, 'user_id');
                     if ($res) {
@@ -492,6 +476,34 @@ Class SchoolAppClass {
         //print_r($exist);
         if ($exist) {
             $data = $exist;
+            $success = TRUE;
+            $msg = 'Data populated successfully.';
+        } 
+        $res_arr['status'] = 'Ok';
+        $res_arr['is_success'] = $success;
+        $res_arr['msg'] = $msg;
+        $res_arr['data'] = $data;
+
+        return $res_arr;
+    }
+    
+    function get_schools($attribute_arr) {
+        $fields['user_id'] = $attribute_arr['user_id'];
+        $fields['user_type'] = 5;
+        $condition = $this->prepare_attributes($fields, 'AND');
+        $tbl_name = 'users';
+        $exist = $this->get_data_by_table($tbl_name, $condition);
+        $data = array();
+        
+        $success = false;
+        $msg = 'No user found';
+        $i = 1;
+        
+        if ($exist) {
+            foreach($exist as $line) {
+                $ret_arr[] = array('school_id' => $line->user_id, 'name' => $line->name);
+            }
+            $data = $ret_arr;
             $success = TRUE;
             $msg = 'Data populated successfully.';
         } 

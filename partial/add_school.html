@@ -1,0 +1,28 @@
+<div>
+      <!-- registration-form-wrapper starts Here -->
+      <div class="registration-form-wrapper clearfix"  ng-controller="ManageUsers">
+        <!-- student registration-form starts Here -->
+        <div class="registration-form clearfix tabbing active-content" id="tab1">
+          <h3> School Details</h3>
+          <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_student}}</div>
+          <div class="clearfix" >
+            <form ng-submit="createUser('5')" ng-init="loader_hide=1">
+              <div class="wrapper-field clearfix">
+                <label class="label">User Name for School</label>
+                <input type="text" ng-model="name_student" required>
+              </div>
+              <div class="wrapper-field clearfix">
+                <label class="label"> Email Id for School </label>
+                <input type="email" ng-model="email_student" required ng-disabled="disabled_student">
+              </div>
+                <input type="hidden" ng-model="user_id_update" />
+              <input type="submit" value="SUBMIT" >
+              <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
+            </form>
+          </div>
+          <a ng-href="#/list_schools" class="view-list">View Schools List</a> 
+        </div>
+        <!-- student registration-form ends Here --> 
+      </div>
+      <!-- registration-form-wrapper ends Here --> 
+</div>

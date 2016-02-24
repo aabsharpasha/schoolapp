@@ -1,70 +1,53 @@
-      <!-- registration-form-wrapper starts Here -->
-      <div class="registration-form-wrapper clearfix" ng-init="listUsers('2')" ng-controller="ManageUsers">
-          
-        <ul class="clearfix tabbing-list" style="display:none;">
-          <li ><a href="javascript:void(0);" ng-class="{active: student ? 'active': ''}" class="active" ng-click="student = true;teacher=0;">Student</a></li>
-          <li><a href="javascript:void(0);" ng-class="{active: teacher ? 'active': ''}" ng-click="student = 0;teacher=true;">Teacher</a></li>
-        </ul>
-        <!-- student registration-form starts Here -->
-        
-        <!-- student registration-form ends Here --> 
-         <!-- teacher registration-form starts Here -->
-         
-      <div class="show-div">
-          <h3>Teachers List</h3>
-          <div class="section group">
-          <input type="text" placeholder="Search here..." ng-change="search_user(2)" ng-model="search_txt" />
-         
-       <div class="clearfix lists_heading"> 
-                 <div class="col span_changes">
-  <b>Name</b>
-  </div>
-  <div class="col span_changes">
- <b>  User Type</b>
-  </div>
+<!-- registration-form-wrapper starts Here -->
+
+<div class="registration-form-wrapper clearfix" ng-init="listUsers('2')" ng-controller="ManageUsers">
+  <ul class="clearfix tabbing-list" style="display:none;">
+    <li ><a href="javascript:void(0);" ng-class="{active: student ? 'active': ''}" class="active" ng-click="student = true;teacher=0;">Student</a></li>
+    <li><a href="javascript:void(0);" ng-class="{active: teacher ? 'active': ''}" ng-click="student = 0;teacher=true;">Teacher</a></li>
+  </ul>
   
-  <div class="col span_changes_class">
-      <b>  Class</b>
-  </div>
-          <div class="col span_changes">
-  <b>Password</b>
-        </div>
-  <div class="col span_1_of_5">
-  <b>Email</b>
-  </div>
-   <div class="col span-changes">
-  <b>Action</b>
-  </div>
-  </div>
-  <div class="lists clearfix" ng-repeat="list in lists.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))" >
-                <div class="col span_changes">
-	{{list.name}}
-	</div>
-	<div class="col span_changes">
-	Teacher 
-	</div>
-	
-	<div class="col span_changes_class">
-	{{list.class_assoc}}
-	</div>
-                 
-	<div class="col span_changes">
-	{{list.password}}
-        </div>  
-                   <div class="col span_1_of_5">
-	{{list.email}}
-	</div>
-  <div class="col span_changes"> <a class="edit" ng-href="#edit_users/{{list.user_id}}/{{list.user_type}}"></a><a class="delete" href="javascript:void(0);" ng-click="deleteUser(list.user_id, $index);"></a> </div>
-              </div>
-          </div>
-            View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
-
-    <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
-    
-  </div>
-
-      <a ng-href="/dashboard.html#/" class="view-list">Back to Create User</a> 
+  <!-- student registration-form starts Here --> 
+  
+  <!-- student registration-form ends Here --> 
+  
+  <!-- teacher registration-form starts Here -->
+  
+  <div class="show-div">
+    <h3>Teachers List</h3>
+    <div class="section group">
+      <input type="text" placeholder="Search here..." ng-change="search_user(2)" ng-model="search_txt" />
+      <div class="clearfix lists_heading">
+        <div class="col span_changes"> <b>Name</b> </div>
+        <div class="col span_changes"> <b> User Type</b> </div>
+        <div class="col span_changes_class"> <b> Class</b> </div>
+        <div class="col span_changes"> <b>Password</b> </div>
+        <div class="col span_1_of_5"> <b>Email</b> </div>
+        <div class="col span-changes"> <b>Action</b> </div>
       </div>
-      
-        <!--teacher registration-form ends Here --> 
-        
+      <div class="lists clearfix" ng-repeat="list in lists.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))" >
+        <div class="col span_changes"> {{list.name}} </div>
+        <div class="col span_changes"> Teacher </div>
+        <div class="col span_changes_class"> {{list.class_assoc}} </div>
+        <div class="col span_changes"> {{list.password}} </div>
+        <div class="col span_1_of_5"> {{list.email}} </div>
+        <div class="col span_changes"> <a class="edit" ng-href="#edit_users/{{list.user_id}}/{{list.user_type}}"></a><a class="delete" href="javascript:void(0);" ng-click="deleteUser(list.user_id, $index);"></a> </div>
+      </div>
+       <a ng-href="/dashboard.html#/" class="view-list">Back to Create User</a>
+    </div>
+    View
+    <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
+      <option>3</option>
+      <option>5</option>
+      <option>10</option>
+      <option>20</option>
+      <option>30</option>
+      <option>40</option>
+      <option>50</option>
+    </select>
+    records at a time.
+    <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+  </div>
+  </div>
+
+<!--teacher registration-form ends Here --> 
+

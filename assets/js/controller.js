@@ -1,6 +1,7 @@
 var myApp = angular.module('myApp.controllers', ['ngRoute', 'myApp.services', 'ui.bootstrap']);
 
-myApp.controller('LoginController', ['$scope', 'commonServices', '$location', '$window', '$routeParams', function ($scope, commonServices, $location, $window, $routeParams) {
+myApp.controller('LoginController', ['$scope', '$rootScope','commonServices', '$location', '$window', '$routeParams', function ($scope, $rootScope, commonServices, $location, $window, $routeParams) {
+        var cache = {};
         $scope.authLogin = function () {
             var toPost = {};
             var class_str = '';
@@ -12,6 +13,11 @@ myApp.controller('LoginController', ['$scope', 'commonServices', '$location', '$
 
             commonServices.callAction('login', toPost).then(function (res) {
                 if (res.status == 'Ok' && res.is_success) {
+                    //return false;
+                   // console.log(res.data.user_type); return false;
+                    localStorage.setItem("user_type", res.data.user_type);
+                    //console.log(window.localStorage['user_type']);
+                    //return false;
                     //$location.path('/dashboard');
                     $window.location.href = 'dashboard.html';
                 } else {
@@ -47,12 +53,14 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
         ]
         
         $scope.createUser = function (user_type) {
+            //console.log(); return false;
             $scope.loader_show = true;
             $scope.loader_hide = false;
             //console.log(user_type);
             var toPost = {};
             var class_str = '';
             toPost.user_type = user_type;
+            toPost.school_id = $scope.school_select;
             toPost.device = 'desktop';
             toPost.token = '';
             toPost.platform = '';
@@ -87,12 +95,21 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
             {
                  toPost.user_id = $scope.user_id_student;
             }
+            else ($scope.user_id_update)
+            {
+                 toPost.user_id = $scope.user_id_update;
+            }
             commonServices.callAction('create_user', toPost).then(function (res) {
 
                 if (res.status == 'Ok') {
                     if (res.is_success) {
-                        $scope.name = '';
-                        $scope.email = '';
+                        //$scope.reset();
+                        if(!toPost.user_id) {
+                        $scope.name_teacher = '';
+                        $scope.email_teacher = '';
+                        $scope.name_student = '';
+                        $scope.email_student = '';
+                            }
                     }
                 } else
                 {
@@ -253,6 +270,7 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
                    else {
                        $scope.name_student = res.data[0].name;
                        $scope.user_id_student = res.data[0].user_id;
+                       $scope.user_id_update = res.data[0].user_id;
                        $scope.email_student = res.data[0].email;
                        $scope.disabled_student = true;
                        var class_stu = res.data[0].class_assoc;
@@ -279,7 +297,23 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
             });
 
         }
-       
+        
+        $scope.get_schools = function (user_id, user_type) {
+            var toPost = {};
+            toPost.device = 'desktop';
+            toPost.token = '';
+            toPost.user_id = user_id;
+            commonServices.callAction('get_schools', toPost).then(function (res) {
+                if (res.status == 'Ok' && res.is_success) {
+                      $scope.schools = res.data;
+                } else
+                {
+                    alert('Service not available');
+                }
+            });
+
+        }
+        
         $scope.init = function () {
             if($scope.user_type) {
                 $scope.student = ($scope.user_type == 1 ? true: false);
@@ -289,8 +323,9 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
             {
                 $scope.student = true;
             }
+            $scope.get_schools();
        }
-        if($scope.user_id) {
+        if($scope.user_id || $scope.user_id_update) {
             $scope.get_user($scope.user_id, $scope.user_type);
         }
        
@@ -340,11 +375,15 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
            toPost.content_url = $scope.content_url;
            toPost.video_url = $scope.video_url;
            toPost.description = $scope.value;
+           //console.log($scope.format_content_time_to_db($scope.content_time));
+           if(content_type == 2) {  
+              toPost.content_time = $scope.format_content_time_to_db($scope.content_time);
+           }
            if($scope.content_id)
             toPost.content_id = $scope.content_id;
        
             toPost.status = 1;
-           if(content_type == 1 || content_type == 3 || content_type == 4) {
+           if(content_type == 1 || content_type == 5 || content_type == 4 || content_type == 2) {
                var class_str = '';
                 angular.forEach($scope.Items, function (item) {
                     angular.forEach(item.Name, function (item) {
@@ -362,6 +401,13 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
            commonServices.callAction('save_data', toPost).then(function (res) {
                //console.log(res);
                if (res.status == 'Ok' && res.is_success) {
+                   if(!$scope.content_id) {
+                       $scope.content_title = '';
+                       $scope.content_url = '';
+                       $scope.video_url = '';
+                       $scope.value = '';
+                       $scope.content_time = '';
+                   }
                      //console.log(res.data[0].name);
                   if(content_type == 2) {
 
@@ -372,7 +418,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
 
                } else
                {
-                   alert('Service not available');
+                   //alert('Service not available');
                }
                $scope.msg = res.msg;
                $scope.loader_show = false;
@@ -493,7 +539,11 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
                        $scope.video_url = res.data[0].video_url;
                        $scope.content_url = res.data[0].content_url;
                        $scope.value = res.data[0].description;
-                       if(content_type == 1 || content_type == 3 || content_type == 4) {
+                    if(content_type == 2) {   
+                    var content_time = $scope.format_content_time_to_show(res.data[0].content_time);
+                       $scope.content_time = content_time;
+                   }
+                       if(content_type == 1 || content_type == 5 || content_type == 4 || content_type == 2) {
                            var arr_classes = res.data[0].content_class.split(',');
                       // console.log(arr_classes);
                        angular.forEach($scope.Items, function (items) {
@@ -501,7 +551,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
                                  var class_name = item.label.split(' ');
                                  //console.log(class_name);
                                 if($filter('filter')(arr_classes, class_name[1]).length) {
-                                    console.log($filter('filter')(arr_classes, class_name[1]));
+                                    //console.log($filter('filter')(arr_classes, class_name[1]));
                                   item.value = true;  
                                 }
                                 //if(arr_classes, item.value)
@@ -522,10 +572,23 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
 
         }
         
+        $scope.format_content_time_to_show = function (content_time) {
+          var arr_time = content_time.split('-'); 
+          
+          return arr_time[1]+"/"+arr_time[2]+"/"+arr_time[0];
+        }
+        
+        $scope.format_content_time_to_db = function (content_time) {
+          var arr_time = content_time.split('/'); 
+          
+          return arr_time[2]+"-"+arr_time[0]+"-"+arr_time[1];
+        }
+        
         if($scope.content_id) {
             //alert(1);
             $scope.get_content($scope.content_id, $scope.content_type);
         }
+        
        
     $scope.checkAll();     
 }]);

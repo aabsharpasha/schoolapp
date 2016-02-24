@@ -1,5 +1,6 @@
 <?php
 //echo 'hi'; exit;
+error_reporting(E_ALL & ~E_NOTICE);
 require 'vendor/autoload.php';
 require 'includes/SchoolAppClass.php';
 define('API_TOKEN','c5bfec4bd898edb36a87a16ed24d543e');
@@ -122,6 +123,14 @@ $app->post('/get_user_info', function ($request, $response, $args)  {
     validate_user($request->getParsedBody());
    $obj = SchoolAppClass::set_instance();
    $response = $obj->get_user_info($request->getParsedBody());
+   $obj->log_api($request->getParsedBody(), $_SERVER['REQUEST_URI'], $response);
+   echo json_encode($response);
+});
+
+$app->post('/get_schools', function ($request, $response, $args)  {
+    validate_user($request->getParsedBody());
+   $obj = SchoolAppClass::set_instance();
+   $response = $obj->get_schools($request->getParsedBody());
    $obj->log_api($request->getParsedBody(), $_SERVER['REQUEST_URI'], $response);
    echo json_encode($response);
 });

@@ -104,7 +104,7 @@
 	padding-top: 45px;
 	padding-left: 90px;
 	margin-left: 308px;
-	max-width: 717px;
+	max-width: 792px;
 	position: relative;
 }
 .tabbing-list {
@@ -137,7 +137,7 @@
 	color: #404040;
 }
 .registration-form {
-	width: 620px;
+	width: 710px;
 	border: 1px solid #b5b5b5;
 	padding: 24px 20px 45px 24px;
 	position: relative;
@@ -163,13 +163,28 @@
 	display: inline-block;
 	position: absolute;
 	right: 0px;
-	bottom: -30px;
+	top: 20px;
 	z-index: 2;
 	font-size: 16px;
 	line-height: 20px;
 }
+.section.group {
+	position: relative;
+}
+.registration-form .view-list {
+	top: -32px;
+}
 .view-list:hover {
 	color: #4eabc8;
+}
+a:hover, a:focus {
+	text-decoration: none;
+	outline: none;
+	outline-offset: 0;
+}
+.view-list:focus {
+	color: #349dbe;
+	text-decoration: none;
 }
 /**** Assignment page starts here **/
 
@@ -191,6 +206,7 @@
 	margin-bottom: 40px;
 	position: relative;
 	border: 1px solid #d7d7d7;
+	max-width: 574px;
 }
 .select-class-data {
 	padding-left: 30px;
@@ -413,6 +429,14 @@ div.show-div {
 	width: 29%;
 	word-wrap: break-word;
 }
+.span_1_of_4 {
+	width: 25%;
+	word-wrap: break-word;
+}
+.span_1_of_3 {
+	width: 20%;
+	word-wrap: break-word;
+}
 .span_changes {
 	width: 13%;
 }
@@ -453,9 +477,18 @@ div.show-div {
 	text-transform: uppercase;
 	color: #fff;
 }
+.close-class {
+     color: red;
+    float: right;
+    margin: 8px;
+}
 /*  GO FULL WIDTH BELOW 480 PIXELS */
-
-@media only screen and (max-width: 480px) {
+input[type="text"].search-data {
+	max-width: 300px;
+	height: 40px;
+	line-height: 40px;
+}
+ @media only screen and (max-width: 480px) {
 .col {
 	margin: 1% 0 1% 0%;
 }

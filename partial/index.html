@@ -5,7 +5,7 @@
         
         <div class="login-form" >
            
-            <div style="height:25;color:green;font-size:15px;margin:20px;" ng-show="msg">{{msg}}</div>
+            <div style="height:25;color:green;font-size:15px;margin:20px;" ng-show="msg" style="display:none;">{{msg}}</div>
             <form ng-submit="authLogin()">
                 <input type="text" placeholder="Username" ng-model="username" required />
                 <input type="password" placeholder="Password" ng-model = "password" required />

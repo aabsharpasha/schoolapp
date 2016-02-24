@@ -21,6 +21,22 @@ var app = angular.module('myApp', ['myApp.services','myApp.controllers', "ngRout
                 templateUrl: 'partial/student.html',
                 controller: 'LoginController'
             })
+            .when('/add_school', {
+                templateUrl: 'partial/add_school.html',
+                controller: 'ManageUsers'
+            })
+            .when('/add_parent', {
+                templateUrl: 'partial/add_parent.html',
+                controller: 'ManageUsers'
+            })
+            .when('/list_schools', {
+                templateUrl: 'partial/list_schools.html',
+                controller: 'ManageUsers'
+            })
+            .when('/list_parents', {
+                templateUrl: 'partial/list_parents.html',
+                controller: 'ManageUsers'
+            })
             .when('/users', {
                 templateUrl: 'partial/list_users.html',
                 controller: 'ManageUsers',
@@ -28,8 +44,14 @@ var app = angular.module('myApp', ['myApp.services','myApp.controllers', "ngRout
             })
              .when('/edit_users/:user_id/:user_type', {
                 templateUrl: 'partial/inner_student.html',
-                 })
-                 
+             })
+             .when('/edit_parent/:user_id/:user_type', {
+                templateUrl: 'partial/add_parent.html',
+             })
+             .when('/edit_school/:user_id/:user_type', {
+                templateUrl: 'partial/add_school.html',
+                controller: 'ManageUsers',
+             })
             .when('/users_teachers', {
                 templateUrl: 'partial/list_users_teacher.html',
                 controller: 'ManageUsers',
@@ -59,12 +81,24 @@ var app = angular.module('myApp', ['myApp.services','myApp.controllers', "ngRout
                 templateUrl: 'partial/add_info_class.html',
                 controller: 'ManageContent',
             })
+             .when('/add_timetable', {
+                templateUrl: 'partial/add_timetable.html',
+                controller: 'ManageContent',
+            })
+            .when('/list_timetable', {
+                templateUrl: 'partial/list_timetable.html',
+                controller: 'ManageContent',
+            })
             .when('/list_assignment', {
                 templateUrl: 'partial/list_assignment.html',
                 controller: 'ManageContent',
             })
             .when('/edit_assignment/:content_id/:content_type', {
                 templateUrl: 'partial/add_assignment.html',
+                controller: 'ManageContent',
+            })
+             .when('/edit_timetable/:content_id/:content_type', {
+                templateUrl: 'partial/add_timetable.html',
                 controller: 'ManageContent',
             })
             .when('/edit_info_class/:content_id/:content_type', {

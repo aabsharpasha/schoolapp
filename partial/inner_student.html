@@ -1,100 +1,169 @@
+<style>
+    .school-select {
+        font-size: 14px;
+        margin: 10px 0;
+        padding: 3px;
+        width: 86%;
+    }
+    .school-select option{padding:10px;}
+</style>
 <div>
-      <!-- registration-form-wrapper starts Here -->
-      <div class="registration-form-wrapper clearfix" ng-init="init()" ng-controller="ManageUsers">
-          
+
+    <!-- registration-form-wrapper starts Here -->
+
+    <div class="registration-form-wrapper clearfix" ng-init="init()" ng-controller="ManageUsers">
         <ul class="clearfix tabbing-list">
-          <li ><a href="javascript:void(0);" ng-class="{active: student ? 'active': ''}" ng-click="student = true;teacher=0;">Student</a></li>
-          <li><a href="javascript:void(0);" ng-class="{active: teacher ? 'active': ''}" ng-click="student = 0;teacher=true;">Teacher</a></li>
+
+            <li ><a href="javascript:void(0);" ng-class="{active: student ? 'active': ''}" ng-click="student = true; teacher = 0;">Student</a></li>
+
+            <li><a href="javascript:void(0);" ng-class="{active: teacher ? 'active': ''}" ng-click="student = 0; teacher = true;">Teacher</a></li>
+
         </ul>
+
         <!-- student registration-form starts Here -->
+
         <div ng-show="student" ng-hide="!student" ng-class="{active: student ? 'active': ''}" class="registration-form clearfix tabbing active-content" id="tab1">
-          <script>
-              $('.select-dropdown-listing input[type=checkbox]').each(function() {
-			var $this = $(this);
-			var id = $(this).attr('id');
-		   $(this).wrap('<span class="c-form"></span>');		   
-		   $(this).after('<label for="'+ id + '"></label>');     
-	});
-          </script>
-         
-  <div class="select-class">
-      
-            <div class="clearfix select-class-data"> Select Class <i></i> </div>
-            <div class="select-dropdown">
-              <div class="clearfix select-dropdown-listing" style="float:left;width:200px;" ng-repeat = "item_parent1 in Items1">
-                <div class="select-dropdown-listing-left">
-               <span class="c-form radio-form">
-                  <input ng-required type="radio" id="class-one-teach{{item_parent1.label}}" value="{{item_parent1.value}}" name="student_class"  ng-model="$parent.student_class">
-                  <label for="class-one-teach{{item_parent1.label}}"></label>
-                </span>
-                    <label for="class-one-teach{{item_parent1.label}}">{{item_parent1.label}}</label>
+
+            <script>
+
+                                $('.select-dropdown-listing input[type=checkbox]').each(function() {
+
+                        var $this = $(this);
+                                var id = $(this).attr('id');
+                                $(this).wrap('<span class="c-form"></span>');
+                                $(this).after('<label for="' + id + '"></label>');
+                        });          </script>
+
+           
+               <select name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+               </select>
+                
+               
+            <div class="select-class">
+                <div class="clearfix select-class-data"> Select Class <i></i> </div>
+                <div class="select-dropdown">
+                    <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
+                    <div class="clearfix select-dropdown-listing" style="float:left;width:200px;" ng-repeat = "item_parent1 in Items1">
+                        <div class="select-dropdown-listing-left">
+                            <span class="c-form radio-form">
+                                <input ng-required type="radio" id="class-one-teach{{item_parent1.label}}" value="{{item_parent1.value}}" name="student_class"  ng-model="$parent.student_class">
+                                <label for="class-one-teach{{item_parent1.label}}"></label>
+                            </span>
+                            <label for="class-one-teach{{item_parent1.label}}">{{item_parent1.label}}</label>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <h3> Student Username &amp; Password</h3>
-          <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_student}}</div>
-          <div class="clearfix" >
-            <form ng-submit="createUser('1')" ng-init="loader_hide=1">
-              <div class="wrapper-field clearfix">
-                <label class="label"> Name </label>
-                <input type="text" ng-model="name_student" required>
-              </div>
-              <div class="wrapper-field clearfix">
-                <label class="label"> Email Id </label>
-                <input type="email" ng-model="email_student" required ng-disabled="disabled_student">
-              </div>
-                <input type="hidden" ng-model="user_id_student" />
-              <input type="submit" value="SUBMIT" >
-              <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
-            </form>
-          </div>
-          <a ng-href="#/users" class="view-list">View Students List</a> 
+            <h3> Student Username &amp; Password</h3>
+            <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_student}}</div>
+            <div class="clearfix" >
+                <form ng-submit="createUser('1')" ng-init="loader_hide = 1">
+                    <div class="wrapper-field clearfix">
+                        <label class="label"> Name </label>
+                        <input type="text" ng-model="name_student" required>
+                    </div>
+                    <div class="wrapper-field clearfix">
+                        <label class="label"> Email Id </label>
+                        <input type="email" ng-model="email_student" required ng-disabled="disabled_student">
+                    </div>
+                    <input type="hidden" ng-model="user_id_student" />
+                    <input type="submit" value="SUBMIT" >
+                    <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
+                </form>
+            </div>
+            <a ng-href="#/users" class="view-list">View Students List</a> 
         </div>
         <!-- student registration-form ends Here --> 
-         <!-- teacher registration-form starts Here -->
-         <div class="registration-form clearfix" id="tab2"  ng-show="teacher" ng-hide="!teacher">
-        
+
+        <!-- teacher registration-form starts Here -->
+
+        <div class="registration-form clearfix" id="tab2"  ng-show="teacher" ng-hide="!teacher">
+
+
+
             <div class="select-class">
-            <div class="clearfix select-class-data"> Select Class <i></i> </div>
-            <div class="select-dropdown">
-                <div class="clearfix select-dropdown-listing">
-                <div class="select-dropdown-listing-left">
-                  <input type="checkbox" id="select-all" ng-model="selectedAll" ng-click="checkAll()">
-                  <label for="select-all"> Select All </label>
-                </div>
-              </div>
-              <div class="clearfix select-dropdown-listing" ng-repeat = "item_parent in Items">
-                <div class="select-dropdown-listing-left" ng-repeat = "item in item_parent.Name">
-                  <input type="checkbox" id="class-one-{{item.label}}" ng-model="item.value">
-                  <label for="class-one-{{item.label}}">{{item.label}}</label>
+
+                <div class="clearfix select-class-data"> Select Class <i></i> </div>
+
+                <div class="select-dropdown">
+
+                    <div class="clearfix select-dropdown-listing">
+
+                        <div class="select-dropdown-listing-left">
+
+                            <input type="checkbox" id="select-all" ng-model="selectedAll" ng-click="checkAll()">
+
+                            <label for="select-all"> Select All </label>
+
+                        </div>
+                        <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
+                    </div>
+
+                    <div class="clearfix select-dropdown-listing" ng-repeat = "item_parent in Items">
+
+                        <div class="select-dropdown-listing-left" ng-repeat = "item in item_parent.Name">
+
+                            <input type="checkbox" id="class-one-{{item.label}}" ng-model="item.value">
+
+                            <label for="class-one-{{item.label}}">{{item.label}}</label>
+
+                        </div>
+
+
+
+                    </div>
+
+
+
                 </div>
 
-              </div>
-              
             </div>
-          </div>
-          <h3> Teacher Username &amp; Password</h3>
-          <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_teach}}</div>
-          <div class="clearfix" >
-            <form ng-submit="createUser('2')" ng-init="loader_hide=1">
-              <div class="wrapper-field clearfix">
-                <label class="label"> Name </label>
-                <input type="text" ng-model="name_teacher" required>
-              </div>
-              <div class="wrapper-field clearfix">
-                <label class="label"> Email Id </label>
-                <input type="email" ng-model="email_teacher" required ng-disabled="disabled_teacher">
-              </div>
-                <input type="hidden" ng-model="user_id_teacher" />
-              <input type="submit" value="SUBMIT" >
-              <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
-            </form>
-          </div>
-          <a href="#/users_teachers" class="view-list">View Teachers List</a> 
+
+            <h3> Teacher Username &amp; Password</h3>
+
+            <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_teach}}</div>
+
+            <div class="clearfix" >
+
+                <form ng-submit="createUser('2')" ng-init="loader_hide = 1">
+
+                    <div class="wrapper-field clearfix">
+
+                        <label class="label"> Name </label>
+
+                        <input type="text" ng-model="name_teacher" required>
+
+                    </div>
+
+                    <div class="wrapper-field clearfix">
+
+                        <label class="label"> Email Id </label>
+
+                        <input type="email" ng-model="email_teacher" required ng-disabled="disabled_teacher">
+
+                    </div>
+
+                    <input type="hidden" ng-model="user_id_teacher" />
+
+                    <input type="submit" value="SUBMIT" >
+
+                    <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
+
+                </form>
+
+            </div>
+
+            <a href="#/users_teachers" class="view-list student-list">View Teachers List</a> 
+
         </div>
-        
+
+
+
         <!--teacher registration-form ends Here --> 
-        </div>
-      <!-- registration-form-wrapper ends Here --> 
-      </div>
+
+    </div>
+
+    <!-- registration-form-wrapper ends Here --> 
+
+</div>

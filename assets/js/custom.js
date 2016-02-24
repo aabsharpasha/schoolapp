@@ -1,4 +1,8 @@
 $(document).ready(function() {
+       $(document).delegate('.close-class', 'click', function(){
+		$('.select-dropdown').slideToggle(200);
+               
+	});
 	$('.select-dropdown-listing input[type=checkbox]').each(function() {
 			var $this = $(this);
 			var id = $(this).attr('id');
@@ -13,8 +17,10 @@ $(document).ready(function() {
 	});
 	$(document).delegate('.select-class i', 'click', function(){
 		$('.select-dropdown').slideToggle(200);
+               
 	});		
-   // $("#datepicker").datepicker();
+        
+         $(".select-dropdown-listing").prepend('<div class="close-class"><a href="javascript:void(0)">Close</a></div>');
 	
 	/*$(".tabbing-list a").click(function() {
 		$(".tabbing-list").find("a").removeClass("active");
