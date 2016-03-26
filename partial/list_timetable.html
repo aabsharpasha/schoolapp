@@ -1,7 +1,7 @@
     
 <!-- wrapper starts Here -->
       <!-- registration-form-wrapper starts Here -->
-      <div class="registration-form-wrapper clearfix" ng-init="listData('6')">
+      <div class="registration-form-wrapper clearfix" ng-init="listData('2',1)">
          
         <ul class="clearfix tabbing-list" style="display:none;">
           <li ><a href="javascript:void(0);" ng-class="{active: student ? 'active': ''}" class="active" ng-click="student = true;teacher=0;">Student</a></li>
@@ -12,10 +12,10 @@
         <!-- student registration-form ends Here --> 
          <!-- teacher registration-form starts Here -->
       <div class="show-div">
-          <h3>Event List</h3> 
+          <h3>Timetable List</h3> 
           <div class="section group">
-              <a ng-href="#add_information" class="view-list">Back to Create Event</a> 
-              <input type="text" placeholder="Search here..." ng-change="search_data(6)" ng-model="search_txt" />
+              <a ng-href="#add_timetable" class="view-list">Back to Create Timetable</a> 
+              <input type="text" placeholder="Search here..." ng-change="search_data(2, 1)" ng-model="search_txt" />
        <div>
                <div class="clearfix lists_heading"> 
            <div class="col span_changes">
@@ -24,11 +24,14 @@
   
   
   <div class="col span_1_of_5">
-      <b>Content Url</b>
+      <b>Timetable Date</b>
   </div>
-   <div class="col span_1_of_5">
+  <div class="col span_1_of_5">
+      <b>For Class</b>
+  </div>
+<!--   <div class="col span_1_of_5">
       <b>Date Added</b>
-  </div>
+  </div>-->
    <div class="col span_changes">
   <b>Action</b>
   </div>
@@ -41,13 +44,16 @@
   
                  
   <div class="col span_1_of_5">
-  {{list.content_url}}
+  {{list.content_time}}
         </div>  
-      <div class="col span_1_of_5">
-  {{list.added_date}} 
+       <div class="col span_1_of_5">
+  {{list.content_class}} 
   </div>
+<!--      <div class="col span_1_of_5">
+  {{list.added_date}} 
+  </div>-->
                 
-  <div class="col span_changes"> <a class="edit" ng-href="#edit_info/{{list.content_id}}/{{list.content_type}}"></a><a class="delete" href="javascript:void(0);" ng-click="deleteContent(list.content_id, $index);"></a> </div>
+  <div class="col span_changes"> <a class="edit" ng-href="#edit_timetable/{{list.content_id}}/{{list.content_type}}"></a><a class="delete" href="javascript:void(0);" ng-click="deleteContent(list.content_id, $index);"></a> </div>
               </div>
           </div>
                 View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.

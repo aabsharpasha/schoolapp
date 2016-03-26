@@ -11,7 +11,10 @@
   <div class="registration-form clearfix tabbing active-content" id="tab1"  ng-init="loader_hide=1">
     <h3> Add Notification... </h3>
     <form ng-submit="save_data('5')" ng-init="loader_hide=1">
-      <div class="select-class">
+      <select ng-hide="true" ng-show="show_hide_school" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+      </select>
+        <div class="select-class">
         <div class="clearfix select-class-data"> Select Class <i></i> </div>
         <div class="select-dropdown">
           <div class="clearfix select-dropdown-listing">
@@ -22,7 +25,7 @@
               <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
           </div>
           <div class="clearfix select-dropdown-listing" ng-repeat = "item_parent in Items">
-            <div class="select-dropdown-listing-left" ng-repeat = "item in item_parent.Name">
+            <div class="select-dropdown-listing-left" ng-repeat = 'item in item_parent.Name | customArray:class_items:"item_value"'>
               <input type="checkbox" id="class-one-{{item.label}}" ng-model="item.value">
               <label for="class-one-{{item.label}}">{{item.label}}</label>
             </div>

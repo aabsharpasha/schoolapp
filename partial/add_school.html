@@ -4,15 +4,15 @@
         <!-- student registration-form starts Here -->
         <div class="registration-form clearfix tabbing active-content" id="tab1">
           <h3> School Details</h3>
-          <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_student}}</div>
+          <div style="display:none;">{{msg_student}}</div>
           <div class="clearfix" >
             <form ng-submit="createUser('5')" ng-init="loader_hide=1">
               <div class="wrapper-field clearfix">
-                <label class="label">User Name for School</label>
+                <label class="label">School Name</label>
                 <input type="text" ng-model="name_student" required>
               </div>
               <div class="wrapper-field clearfix">
-                <label class="label"> Email Id for School </label>
+                <label class="label"> Email </label>
                 <input type="email" ng-model="email_student" required ng-disabled="disabled_student">
               </div>
                 <input type="hidden" ng-model="user_id_update" />

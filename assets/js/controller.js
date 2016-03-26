@@ -2,6 +2,7 @@ var myApp = angular.module('myApp.controllers', ['ngRoute', 'myApp.services', 'u
 
 myApp.controller('LoginController', ['$scope', '$rootScope','commonServices', '$location', '$window', '$routeParams', function ($scope, $rootScope, commonServices, $location, $window, $routeParams) {
         var cache = {};
+        $scope.myStyle="{'height':'25', 'color':'green', 'font-size':'15px', 'margin':'20px', 'display':'block'}";
         $scope.authLogin = function () {
             var toPost = {};
             var class_str = '';
@@ -10,15 +11,25 @@ myApp.controller('LoginController', ['$scope', '$rootScope','commonServices', '$
             toPost.device = 'desktop';
             toPost.token = '';
             toPost.platform = '';
-
+            
             commonServices.callAction('login', toPost).then(function (res) {
-                if (res.status == 'Ok' && res.is_success) {
+                if (res.status == 'Ok' && res.is_success && (res.data.user_type != 1 || res.data.user_type != 4)) {
                     //return false;
+                    
                    // console.log(res.data.user_type); return false;
-                    localStorage.setItem("user_type", res.data.user_type);
-                    //console.log(window.localStorage['user_type']);
-                    //return false;
-                    //$location.path('/dashboard');
+                   localStorage.clear();
+                   localStorage.setItem("id", res.data.user_id);
+                   localStorage.setItem("user_type", res.data.user_type);
+                   if(res.data.user_type == 5) {
+                    localStorage.setItem("user_id", res.data.user_id);
+                    localStorage.setItem("school_id", res.data.user_id);
+                   }
+                   else
+                   {
+                       localStorage.setItem("user_id", res.data.school_id);
+                       localStorage.setItem("school_id", res.data.school_id);
+                   }
+                   
                     $window.location.href = 'dashboard.html';
                 } else {
                     console.log(res.msg);
@@ -26,12 +37,51 @@ myApp.controller('LoginController', ['$scope', '$rootScope','commonServices', '$
                 }
             });
         }
+        
 }]);
 
-myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$window', '$routeParams','$filter', function ($scope, commonServices, $location, $window, $routeParams,$filter) {
+myApp.controller('ManageUsers', ['$scope','commonServices', '$location', '$window', '$routeParams','$filter', '$rootScope',function ($scope, commonServices, $location, $window, $routeParams,$filter, $rootScope) {
         $scope.user_type = $routeParams['user_type'];
         $scope.user_id = $routeParams['user_id']
+        $scope.show_hide_teach = false;
+        if(localStorage.getItem('user_type') == 3) {
+            $scope.show_hide_school = true;
+        }
+        else
+        {
+           $scope.show_hide_school = false; 
+        }
         
+        if(localStorage.getItem('user_type') == 2) {
+            $scope.show_hide_teach = true;
+        }
+         $scope.get_classes = function (user_id) {
+           //alert(user_id+"--"+user_type);
+            var toPost = {};
+            toPost.device = 'desktop';
+            toPost.token = '';
+            toPost.user_id = user_id;
+            
+            commonServices.callAction('get_classroom_info', toPost).then(function (res) {
+                if (res.status == 'Ok' && res.is_success) {
+                    //console.log(res);
+                    //alert(res.data.length);
+                      if(localStorage.getItem('user_type') == 2) {
+                          //alert(res.data[0].school_id);
+                        $scope.class_items = res.data.active_class_rooms.split(',');
+                      }
+                      else {
+                        $scope.class_items = res.data.all_class_rooms.split(',');
+                      }
+                  //console.log($scope.class_items);
+                } else
+                {
+                    //alert('Service not available');
+                }
+            });
+
+        }
+       $scope.get_classes(localStorage.getItem("id"));
         $scope.Items = [{
                 Name: [{label: "Class 1", value: "1"}, {label: "Class 2", value: "2"}]
             }, {
@@ -64,7 +114,7 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
             toPost.device = 'desktop';
             toPost.token = '';
             toPost.platform = '';
-
+            
             if (user_type == '2') {
                 toPost.name = $scope.name_teacher;
                 toPost.email = $scope.email_teacher;
@@ -113,7 +163,7 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
                     }
                 } else
                 {
-                    alert('Service not available');
+                    //alert('Service not available');
                 }
                 $scope.loader_show = false;
                 $scope.loader_hide = true;
@@ -145,7 +195,7 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
                    $scope.lists.splice(index, 1);
                 } else
                 {
-                    alert('Service not available');
+                    //alert('Service not available');
                 }
                 $scope.loader_show = false;
                 $scope.loader_hide = true;
@@ -162,6 +212,10 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
             toPost.user_type = user_type;
             toPost.device = 'desktop';
             toPost.token = '';
+            if(localStorage.getItem('user_type') != 3) {
+                 toPost.school_id = localStorage.getItem('school_id');
+            }
+            
             commonServices.callAction('list_users', toPost).then(function (res) {
                 if (res.status == 'Ok') {
                     //  console.log(res);
@@ -229,7 +283,7 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
                     $scope.maxSize = 10; //Number of pager buttons to show
                 } else
                 {
-                    alert('Service not available');
+                    //alert('Service not available');
                 }
                 $scope.msg = res.msg;
                 // console.log(res.status);
@@ -250,6 +304,7 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
                    if(user_type == 2) {
                        $scope.name_teacher = res.data[0].name;
                        $scope.user_id_teacher = res.data[0].user_id;
+                       $scope.user_id_update = res.data[0].user_id;
                        $scope.email_teacher = res.data[0].email;
                        $scope.disabled_teacher = true;
                        var arr_classes = res.data[0].class_assoc.split(',');
@@ -289,7 +344,7 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
                    
                 } else
                 {
-                    alert('Service not available');
+                    //alert('Service not available');
                 }
                 $scope.msg = res.msg;
                 // console.log(res.status);
@@ -303,37 +358,133 @@ myApp.controller('ManageUsers', ['$scope', 'commonServices', '$location', '$wind
             toPost.device = 'desktop';
             toPost.token = '';
             toPost.user_id = user_id;
+            toPost.user_type = user_type;
+            $scope.show_hide_school = false;
             commonServices.callAction('get_schools', toPost).then(function (res) {
-                if (res.status == 'Ok' && res.is_success) {
+                    if (res.status == 'Ok' && res.is_success) {
+                    //alert(res.data.length);
+                      if(res.data.length == 1) {
+                          //alert(res.data[0].school_id);
+                          $scope.school_select = res.data[0].school_id;
+                          $scope.show_hide_school = false;
+                      }
+                      else
+                      {
+                        $scope.show_hide_school = true;
+                      }
+                    if(localStorage.getItem('user_type') != 3)
+                    {
+                        $rootScope.schoolName = res.data[0].name;
+                    }
+                    else
+                    {
+                        $rootScope.schoolName = 'neshorntechnologies';
+                    }
                       $scope.schools = res.data;
                 } else
                 {
-                    alert('Service not available');
+                    ////alert('Service not available');
                 }
             });
 
         }
-        
+        //$scope.get_schools();
         $scope.init = function () {
             if($scope.user_type) {
                 $scope.student = ($scope.user_type == 1 ? true: false);
                 $scope.teacher = ($scope.user_type == 2 ? true: false);
+                $scope.parent = ($scope.user_type == 4 ? true: false);
             }
             else
             {
                 $scope.student = true;
             }
-            $scope.get_schools();
+            
        }
         if($scope.user_id || $scope.user_id_update) {
             $scope.get_user($scope.user_id, $scope.user_type);
         }
        
         $scope.checkAll();
+        
+        $scope.get_schools(localStorage.getItem("user_id"), localStorage.getItem("user_type"));
 
 }]);
 
-myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$window', '$routeParams','$filter', function ($scope, commonServices, $location, $window, $routeParams,$filter) {
+myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$window', '$routeParams','$filter', '$rootScope', function ($scope, commonServices, $location, $window, $routeParams,$filter, $rootScope) {
+        
+        $scope.show_hide_school = false;
+        $scope.Items = [{
+                Name: [{label: "Class 1", value: "1", item_value: "1"}, {label: "Class 2", value: "2", item_value: "2"}]
+            }, {
+                Name: [{label: "Class 3", value: "3", item_value: "3"}, {label: "Class 4", value: "4", item_value: "4"}]
+            }, {
+                Name: [{label: "Class 5", value: "5", item_value: "5"}, {label: "Class 6", value: "6", item_value: "6"}]
+            }, {
+                Name: [{label: "Class 7", value: "7", item_value: "7"}, {label: "Class 8", value: "8", item_value: "8"}]
+            }, {
+                Name: [{label: "Class 9", value: "9", item_value: "9"}, {label: "Class 10", value: "10", item_value: "10"}]
+            }];
+       $scope.get_schools = function (user_id, user_type) {
+           //alert(user_id+"--"+user_type);
+            var toPost = {};
+            toPost.device = 'desktop';
+            toPost.token = '';
+            toPost.user_id = user_id;
+            toPost.user_type = user_type;
+            $scope.show_hide_school = false;
+            commonServices.callAction('get_schools', toPost).then(function (res) {
+                if (res.status == 'Ok' && res.is_success) {
+                    //alert(res.data.length);
+                      if(res.data.length == 1) {
+                          //alert(res.data[0].school_id);
+                          $scope.school_select = res.data[0].school_id;
+                          $scope.show_hide_school = false;
+                      }
+                      else
+                      {
+                        $scope.show_hide_school = true;  
+                      }
+                    
+                      $scope.schools = res.data;
+                } else
+                {
+                    //alert('Service not available');
+                }
+            });
+
+        }
+       $scope.get_schools(localStorage.getItem("user_id"), localStorage.getItem('user_type'));
+       
+       $scope.get_classes = function (user_id) {
+           //alert(user_id+"--"+user_type);
+            var toPost = {};
+            toPost.device = 'desktop';
+            toPost.token = '';
+            toPost.user_id = user_id;
+            
+            commonServices.callAction('get_classroom_info', toPost).then(function (res) {
+                if (res.status == 'Ok' && res.is_success) {
+                    //console.log(res);
+                    //alert(res.data.length);
+                      if(localStorage.getItem('user_type') == 2) {
+                          //alert(res.data[0].school_id);
+                        $scope.class_items = res.data.active_class_rooms.split(',');
+                       console.log($scope.class_items);
+                      }
+                      else {
+                        $scope.class_items = res.data.all_class_rooms.split(',');
+                      }
+                } else
+                {
+                    ////alert('Service not available');
+                }
+            });
+
+        }
+       
+       $scope.get_classes(localStorage.getItem("id"));
+       
         $scope.checkAll = function () {
             if ($scope.selectedAll) {
                 $scope.selectedAll = true;
@@ -353,17 +504,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
         $scope.content_type = $routeParams['content_type'];
         $scope.content_id = $routeParams['content_id'];
         $scope.active_tab = 'content';
-        $scope.Items = [{
-                Name: [{label: "Class 1", value: "1"}, {label: "Class 2", value: "2"}]
-            }, {
-                Name: [{label: "Class 3", value: "3"}, {label: "Class 4", value: "4"}]
-            }, {
-                Name: [{label: "Class 5", value: "5"}, {label: "Class 6", value: "6"}]
-            }, {
-                Name: [{label: "Class 7", value: "7"}, {label: "Class 8", value: "8"}]
-            }, {
-                Name: [{label: "Class 9", value: "9"}, {label: "Class 10", value: "10"}]
-            }];
+       
         $scope.save_data = function (content_type) {
            $scope.loader_show = true;
            $scope.loader_hide = false;
@@ -375,8 +516,9 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
            toPost.content_url = $scope.content_url;
            toPost.video_url = $scope.video_url;
            toPost.description = $scope.value;
+           toPost.school_id = $scope.school_select;
            //console.log($scope.format_content_time_to_db($scope.content_time));
-           if(content_type == 2) {  
+           if(content_type == 2 || content_type == 6) {  
               toPost.content_time = $scope.format_content_time_to_db($scope.content_time);
            }
            if($scope.content_id)
@@ -418,7 +560,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
 
                } else
                {
-                   //alert('Service not available');
+                   ////alert('Service not available');
                }
                $scope.msg = res.msg;
                $scope.loader_show = false;
@@ -434,6 +576,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
            toPost.device = 'desktop';
            toPost.token = '';
            toPost.platform = '';
+           toPost.school_id = localStorage.getItem('school_id');
            if(is_class) {
              toPost.is_class = 1;
            }
@@ -449,7 +592,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
                    $scope.maxSize = 10; //Number of pager buttons to show
                } else
                {
-                   alert('Service not available');
+                   ////alert('Service not available');
                }
                $scope.msg = res.msg;
                // console.log(res.status);
@@ -478,7 +621,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
                    $scope.maxSize = 10; //Number of pager buttons to show
                } else
                {
-                   alert('Service not available');
+                   ////alert('Service not available');
                }
                $scope.msg = res.msg;
                // console.log(res.status);
@@ -498,7 +641,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
                    $scope.lists.splice(index, 1);
                 } else
                 {
-                    alert('Service not available');
+                    //alert('Service not available');
                 }
                 $scope.loader_show = false;
                 $scope.loader_hide = true;
@@ -529,6 +672,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
             toPost.token = '';
             toPost.platform = '';
             toPost.content_id = content_id;
+            toPost.school_id = localStorage.getItem('school_id');
             commonServices.callAction('get_content_info', toPost).then(function (res) {
                 // console.log(res);
                 if (res.status == 'Ok' && res.is_success) {
@@ -539,7 +683,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
                        $scope.video_url = res.data[0].video_url;
                        $scope.content_url = res.data[0].content_url;
                        $scope.value = res.data[0].description;
-                    if(content_type == 2) {   
+                    if(content_type == 2 || content_type == 6) {   
                     var content_time = $scope.format_content_time_to_show(res.data[0].content_time);
                        $scope.content_time = content_time;
                    }
@@ -563,7 +707,7 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
                    
                 } else
                 {
-                    alert('Service not available');
+                    //alert('Service not available');
                 }
                 $scope.msg = res.msg;
                 // console.log(res.status);
@@ -591,11 +735,55 @@ myApp.controller('ManageContent', ['$scope', 'commonServices', '$location', '$wi
         
        
     $scope.checkAll();     
-}]);
+}]).filter('customArray', function($filter){
+    return function(list, arrayFilter, element){
+    //console.log(arrayFilter);
+        if(arrayFilter){
+            return $filter("filter")(list, function(listItem){
+                return arrayFilter.indexOf(listItem[element]) != -1;
+            });
+        }
+    };
+});;
 
 myApp.controller('TabController', function ($scope) {
         $scope.tab = 1;
-
+        var user_permission_type = localStorage.getItem('user_type');
+         if(user_permission_type == 3) {
+             $scope.mschool = 1;
+             $scope.muser = 1;
+             $scope.mparent = 1;
+             $scope.up_all = 1;
+             $scope.up_cont_class = 1;
+         }
+         else if(user_permission_type == 5)
+         {
+             $scope.mschool = 0;
+             $scope.muser = 1;
+             $scope.mparent = 1;
+             $scope.up_all = 1;
+             $scope.up_cont_class = 1;
+         }
+          else if(user_permission_type == 4)
+         {
+             $scope.mschool = 0;
+             $scope.muser = 0;
+             $scope.mparent = 0;
+             $scope.up_all = 0;
+             $scope.up_cont_class = 0;
+         }
+         else if(user_permission_type == 2)
+         {
+             $scope.mschool = 0;
+             $scope.muser = 1;
+             $scope.mparent = 1;
+             $scope.up_all = 0;
+             $scope.up_cont_class = 1;
+         }
+         else
+         {
+             
+         }
         $scope.setTab = function (tabId) {
            // alert("SEt"+tabId);
             $scope.tab = tabId;

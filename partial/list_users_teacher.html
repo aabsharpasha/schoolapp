@@ -32,7 +32,7 @@
         <div class="col span_1_of_5"> {{list.email}} </div>
         <div class="col span_changes"> <a class="edit" ng-href="#edit_users/{{list.user_id}}/{{list.user_type}}"></a><a class="delete" href="javascript:void(0);" ng-click="deleteUser(list.user_id, $index);"></a> </div>
       </div>
-       <a ng-href="/dashboard.html#/" class="view-list">Back to Create User</a>
+       <a ng-href="dashboard.html#/" class="view-list">Back to Create User</a>
     </div>
     View
     <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">

@@ -39,6 +39,9 @@
           <h3>Create Information... </h3>
 
           <form ng-submit="save_data('4')" ng-init="loader_hide=1">
+            <select ng-hide="true" ng-show="show_hide_school" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+            </select>
 
              <div class="select-class">
 
@@ -60,7 +63,7 @@
 
               <div class="clearfix select-dropdown-listing" ng-repeat = "item_parent in Items">
 
-                <div class="select-dropdown-listing-left" ng-repeat = "item in item_parent.Name">
+                <div class="select-dropdown-listing-left" ng-repeat = 'item in item_parent.Name | customArray:class_items:"item_value"'>
 
                   <input type="checkbox" id="class-one-{{item.label}}" ng-model="item.value">
 

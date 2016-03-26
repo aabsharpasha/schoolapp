@@ -9,7 +9,7 @@ var app = angular.module('myApp', ['myApp.services','myApp.controllers', "ngRout
       } else {
           $rootScope.active_tab = '';
       }
-        
+      
     })
     .config(function ( $routeProvider) {
         $routeProvider
@@ -147,6 +147,7 @@ var app = angular.module('myApp', ['myApp.services','myApp.controllers', "ngRout
     });
 
 app.run(['$location', '$rootScope', function($location, $rootScope) {
+        
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
         //$rootScope.title = current.$$route.title;
     });

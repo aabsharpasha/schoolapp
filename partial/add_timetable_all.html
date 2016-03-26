@@ -1,29 +1,27 @@
 <div class="registration-form-wrapper upload-content-wrapper">
-        <ul class="clearfix tabbing-list upload-tabbing">
-          <li><a ng-href="#add_news"> News </a></li>
-          <li><a ng-href="#add_information" class="active"> Event </a></li>
-          <li><a ng-href="#add_notification">Notification </a></li>
-        </ul>
-       <!--news registration-form starts Here -->
+   <ul ng-controller="TabController" class="clearfix tabbing-list upload-tabbing">
+    <li><a ng-class="{active: isSet(2) ? 'active' : ''}" ng-click="setTab(1)" ng-href="#add_assignment"> Assignment </a></li>
+    <li><a class="active" ng-class="{active: isSet(2) ? 'active' : ''}" ng-click="setTab(2)" ng-href="#add_timetable">Timetable </a></li>
+    <li><a ng-class="{active: isSet(3) ? 'active' : ''}" ng-click="setTab(3)" ng-href="#add_news_class"> Notification </a></li>
+    <li><a ng-class="{active: isSet(4) ? 'active' : ''}" ng-click="setTab(4)" ng-href="#add_info_class"> Information </a></li>
+  </ul>
+  
+  <!--news registration-form starts Here -->
+  
   <div class="registration-form clearfix tabbing active-content" id="tab1"  ng-init="loader_hide=1">
-    <h3> Create Event...</h3>
+    <h3> Create Information...</h3>
     <script>
-       $("#datepicker").datepicker();
+ $("#datepicker").datepicker();
               $('.select-dropdown-listing input[type=checkbox]').each(function() {
-
 			var $this = $(this);
-
 			var id = $(this).attr('id');
 		   $(this).wrap('<span class="c-form"></span>');		   
 		   $(this).after('<label for="'+ id + '"></label>');     
-       });
+	});
 
-     </script>
-    <form ng-submit="save_data('6')" ng-init="loader_hide=1">
-       <select ng-hide="true" ng-show="show_hide_school" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
-                   <option value="" >Select School</option>
-            </select>
-<!--      <div class="select-class">
+          </script>
+    <form ng-submit="save_data('2')" ng-init="loader_hide=1">
+      <div class="select-class">
         <div class="clearfix select-class-data"> Select Class <i></i> </div>
         <div class="select-dropdown">
           <div class="clearfix select-dropdown-listing">
@@ -40,7 +38,7 @@
             </div>
           </div>
         </div>
-      </div>-->
+      </div>
         <div class="select-date">
               <h3> Select Date </h3>
               <input type="text" id="datepicker" ng-model="content_time">
@@ -60,7 +58,7 @@
       <input type="submit" value="SUBMIT" >
       <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
       <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg}}</div>
-    </form><a ng-href="#/list_info" class="view-list">View Events</a>
+    </form><a ng-href="#/list_timetable" class="view-list">View Timetable</a>
   </div>
    </div>
 

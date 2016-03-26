@@ -7,6 +7,12 @@
           <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_student}}</div>
           <div class="clearfix" >
             <form ng-submit="createUser('4')" ng-init="loader_hide=1">
+               <div class="wrapper-field clearfix">
+                
+                <select ng-hide="true" ng-show="show_hide_school" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+            </select>
+               </div>
               <div class="wrapper-field clearfix">
                 <label class="label">User Name</label>
                 <input type="text" ng-model="name_student" required>

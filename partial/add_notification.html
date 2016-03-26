@@ -4,22 +4,25 @@
 
           <li><a ng-href="#add_news" > News </a></li>
 
-          <li><a ng-href="#add_information"> Information </a></li>
+          <li><a ng-href="#add_information"> Event </a></li>
 
           <li><a ng-href="#add_notification" class="active">Notification </a></li>
 
         </ul>
 
         <!--news registration-form starts Here -->
+        <a href="add_notification.html"></a>
 
         <div class="registration-form clearfix tabbing active-content" id="tab1" ng-init="loader_hide=1">
 
           <h3> Add Notification... </h3>
 
           <form ng-submit="save_data('5')" ng-init="loader_hide=1">
-
+              
           <div class="create-assignment">
-
+             <select ng-hide="true" ng-show="show_hide_school" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+            </select>
              <input type="text" placeholder="Enter Title" ng-model="content_title" required>
 
          <textarea required name="editor2" id="editor2" rows="10" cols="80" ck-editor ng-model="value">

@@ -1,23 +1,12 @@
-<style>
-    .school-select {
-        font-size: 14px;
-        margin: 10px 0;
-        padding: 3px;
-        width: 86%;
-    }
-    .school-select option{padding:10px;}
-</style>
 <div>
 
     <!-- registration-form-wrapper starts Here -->
 
     <div class="registration-form-wrapper clearfix" ng-init="init()" ng-controller="ManageUsers">
         <ul class="clearfix tabbing-list">
-
-            <li ><a href="javascript:void(0);" ng-class="{active: student ? 'active': ''}" ng-click="student = true; teacher = 0;">Student</a></li>
-
-            <li><a href="javascript:void(0);" ng-class="{active: teacher ? 'active': ''}" ng-click="student = 0; teacher = true;">Teacher</a></li>
-
+            <li ><a href="javascript:void(0);" ng-class="{active: student ? 'active': ''}" ng-click="student = true; teacher = 0;parent=0;">Student</a></li>
+            <li><a ng-hide="show_hide_teach" href="javascript:void(0);" ng-class="{active: teacher ? 'active': ''}" ng-click="student = 0; teacher = true;parent=0;">Teacher</a></li>
+            <li><a ng-hide="show_hide_parent" href="javascript:void(0);" ng-class="{active: parent ? 'active': ''}" ng-click="student = 0; teacher = 0;parent=true;">Parent</a></li>
         </ul>
 
         <!-- student registration-form starts Here -->
@@ -35,14 +24,15 @@
                         });          </script>
 
            
-               <select name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+               <select ng-show="show_hide_school" ng-hide="true" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
                    <option value="" >Select School</option>
                </select>
+                <input type="hidden" school="school_id" data-ng-show="" ng-model="school_select"/>
                 
                
             <div class="select-class">
                 <div class="clearfix select-class-data"> Select Class <i></i> </div>
-                <div class="select-dropdown">
+<!--                <div class="select-dropdown">
                     <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
                     <div class="clearfix select-dropdown-listing" style="float:left;width:200px;" ng-repeat = "item_parent1 in Items1">
                         <div class="select-dropdown-listing-left">
@@ -51,6 +41,18 @@
                                 <label for="class-one-teach{{item_parent1.label}}"></label>
                             </span>
                             <label for="class-one-teach{{item_parent1.label}}">{{item_parent1.label}}</label>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="select-dropdown">
+                    <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
+                    <div class="clearfix select-dropdown-listing" style="float:left;width:200px;" ng-repeat = "item_parent1 in class_items">
+                        <div class="select-dropdown-listing-left">
+                            <span class="c-form radio-form">
+                                <input ng-required type="radio" id="class-one-teach{{item_parent1}}" value="{{item_parent1}}" name="student_class"  ng-model="$parent.student_class">
+                                <label for="class-one-teach{{item_parent1}}"></label>
+                            </span>
+                            <label for="class-one-teach{{item_parent1}}">Class {{item_parent1}}</label>
                         </div>
                     </div>
                 </div>
@@ -77,49 +79,29 @@
         <!-- student registration-form ends Here --> 
 
         <!-- teacher registration-form starts Here -->
-
         <div class="registration-form clearfix" id="tab2"  ng-show="teacher" ng-hide="!teacher">
-
-
-
+            <select ng-show="show_hide_school" ng-hide="true" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+            </select>
             <div class="select-class">
 
                 <div class="clearfix select-class-data"> Select Class <i></i> </div>
-
                 <div class="select-dropdown">
-
                     <div class="clearfix select-dropdown-listing">
-
                         <div class="select-dropdown-listing-left">
-
                             <input type="checkbox" id="select-all" ng-model="selectedAll" ng-click="checkAll()">
-
                             <label for="select-all"> Select All </label>
-
                         </div>
                         <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
                     </div>
-
                     <div class="clearfix select-dropdown-listing" ng-repeat = "item_parent in Items">
-
-                        <div class="select-dropdown-listing-left" ng-repeat = "item in item_parent.Name">
-
+                        <div class="select-dropdown-listing-left" ng-repeat = 'item in item_parent.Name'>
                             <input type="checkbox" id="class-one-{{item.label}}" ng-model="item.value">
-
                             <label for="class-one-{{item.label}}">{{item.label}}</label>
-
                         </div>
-
-
-
                     </div>
-
-
-
                 </div>
-
             </div>
-
             <h3> Teacher Username &amp; Password</h3>
 
             <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_teach}}</div>
@@ -157,11 +139,69 @@
             <a href="#/users_teachers" class="view-list student-list">View Teachers List</a> 
 
         </div>
-
-
-
         <!--teacher registration-form ends Here --> 
+        
+         <!-- parent registration-form starts Here -->
 
+        <div ng-show="parent" ng-hide="!parent" ng-class="{active: parent ? 'active': ''}" class="registration-form clearfix tabbing active-content" id="tab3">
+
+           
+         
+          <div style="height:25;color:green;font-size:15px;margin:20px;">{{msg_student}}</div>
+          <div class="clearfix" >
+              
+            <form ng-submit="createUser('4')" ng-init="loader_hide=1">
+                
+               <div class="wrapper-field clearfix">
+                
+                <select ng-show="show_hide_school" ng-hide="true" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+            </select>
+               </div>
+                <div class="select-class">
+                <div class="clearfix select-class-data"> Select Class <i></i> </div>
+<!--                <div class="select-dropdown">
+                    <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
+                    <div class="clearfix select-dropdown-listing" style="float:left;width:200px;" ng-repeat = "item_parent1 in Items1">
+                        <div class="select-dropdown-listing-left">
+                            <span class="c-form radio-form">
+                                <input ng-required type="radio" id="class-one-teach{{item_parent1.label}}" value="{{item_parent1.value}}" name="student_class"  ng-model="$parent.student_class">
+                                <label for="class-one-teach{{item_parent1.label}}"></label>
+                            </span>
+                            <label for="class-one-teach{{item_parent1.label}}">{{item_parent1.label}}</label>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="select-dropdown">
+                    <a href="javascript:void(0);" style="color:red;" class="close-class">X Close</a>
+                    <div class="clearfix select-dropdown-listing" style="float:left;width:200px;" ng-repeat = "item_parent1 in class_items">
+                        <div class="select-dropdown-listing-left">
+                            <span class="c-form radio-form">
+                                <input ng-required type="radio" id="class-one-teach{{item_parent1}}" value="{{item_parent1}}" name="student_class"  ng-model="$parent.student_class">
+                                <label for="class-one-teach{{item_parent1}}"></label>
+                            </span>
+                            <label for="class-one-teach{{item_parent1}}">Class {{item_parent1}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                 <h3> Parent Details</h3>
+              <div class="wrapper-field clearfix">
+                <label class="label">User Name</label>
+                <input type="text" ng-model="name_student" required>
+              </div>
+              <div class="wrapper-field clearfix">
+                <label class="label"> Email Id</label>
+                <input type="email" ng-model="email_student" required ng-disabled="disabled_student">
+              </div>
+                <input type="hidden" ng-model="user_id_update" />
+              <input type="submit" value="SUBMIT" >
+              <img style="float:right;margin:28px;" ng-show="loader_show" ng-hide="loader_hide" src="assets/images/ajax-loader.gif" alt="processing..."/>
+            </form>
+          </div>
+          <a ng-href="#/list_parents" class="view-list">View Parent List</a> 
+        </div>
+        <!-- student registration-form ends Here --> 
     </div>
 
     <!-- registration-form-wrapper ends Here --> 

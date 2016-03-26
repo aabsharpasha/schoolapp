@@ -16,7 +16,7 @@
   
   <div class="show-div">
     <h3>Parent List</h3>
-    <div class="section group"> <a ng-href="#/add_parent" class="view-list">Back to Create Parent</a>
+    <div class="section group"> <a ng-href="#/" class="view-list">Back to Create Parent</a>
       <input type="text" placeholder="Search here..." ng-change="search_user(4)" ng-model="search_txt" class="search-data"/>
       <div>
         <div class="clearfix lists_heading">
@@ -29,7 +29,7 @@
           <div class="col span_1_of_5"> {{list.name}} </div>
           <div class="col span_changes"> {{list.password}} </div>
           <div class="col span_1_of_5"> {{list.email}} </div>
-          <div class="col span_changes"> <a class="edit" ng-href="#edit_parent/{{list.user_id}}/{{list.user_type}}"></a><a class="delete" href="javascript:void(0);" ng-click="deleteUser(list.user_id, $index);"></a> </div>
+          <div class="col span_changes"> <a class="edit" ng-href="#edit_users/{{list.user_id}}/{{list.user_type}}"></a><a class="delete" href="javascript:void(0);" ng-click="deleteUser(list.user_id, $index);"></a> </div>
         </div>
       </div>
       View

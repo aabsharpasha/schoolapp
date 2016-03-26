@@ -16,8 +16,8 @@
   
   <div class="show-div">
     <h3>Students List</h3>
-    <div class="section group"> <a ng-href="dashboard.html#/" class="view-list">Back to Create User</a>
-      <input type="text" placeholder="Search here..." ng-change="search_user(1)" ng-model="search_txt" class="search-data"/>
+    <div class="section group">
+      <input type="text" placeholder="Search here..." ng-change="search_user(2)" ng-model="search_txt" />
       <div>
         <div class="clearfix lists_heading">
           <div class="col span_changes"> <b>Name</b> </div>
@@ -49,8 +49,8 @@
       records at a time.
       <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
     </div>
-  </div>
-</div>
+    <a ng-href="/dashboard.html#/" class="view-list">Back to Create User</a> </div>
+  <a href="dashboard.html#/" class="view-list">Back to Create User</a> </div>
 
 <!--teacher registration-form ends Here -->
 

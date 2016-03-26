@@ -1,0 +1,7 @@
+<ul class="clearfix" ng-controller="TabController">
+    <li ng-show="muser"><a ng-class="{active: isSet(1) ? 'active' : ''}" ng-click="setTab(1)" ng-href="dashboard.html#/"> Manage Users </a></li>
+    <li ng-show="mschool"><a ng-href="#/add_school" ng-class="{active: isSet(2) ? 'active' : '' }" ng-click="setTab(2)"> Manage School </a></li>
+    <li ng-show="up_cont_class"><a ng-class="{active: isSet(3) ? 'active' : ''}" ng-click="setTab(3)" ng-href="#add_assignment"> Upload Contents for class </a></li>
+    <li ng-show="up_all"><a href="#/add_news" ng-class="{active: isSet(4) ? 'active' : '' }" ng-click="setTab(4)"> Upload Contents for All </a></li>
+<!--    <li ng-show="mparent"><a ng-href="#/add_parent" ng-class="{active: isSet(5) ? 'active' : '' }" ng-click="setTab(5)"> Manage Parent </a></li>-->
+</ul>

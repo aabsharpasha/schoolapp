@@ -4,7 +4,7 @@
 
           <li><a href="#add_news" class="active"> News </a></li>
 
-          <li><a href="#add_information"> Information </a></li>
+          <li><a href="#add_information"> Event </a></li>
 
           <li><a href="#add_notification">Notification </a></li>
 
@@ -17,6 +17,9 @@
           <h3> Write and Upload the news... </h3>
 
           <form ng-submit="save_data('3')" ng-init="loader_hide=1">
+            <select ng-hide="true" ng-show="show_hide_school" name="schools" class="school-select" ng-model="school_select" ng-options="school.school_id as school.name for school in schools">
+                   <option value="" >Select School</option>
+            </select>
 
           <div class="create-assignment">
 
